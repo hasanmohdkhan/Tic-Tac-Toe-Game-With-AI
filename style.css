@@ -16,7 +16,8 @@ table{
     position: absolute;
     left: 50%;
     margin-left: -155px;
-    top:50px;
+    top:150px;
+
 
 
 }
@@ -41,9 +42,9 @@ table tr td:last-child {
 }
 
 .endgame{
-    display: none;
+
     width: 200px;
-    top:160px;
+    top:255px;
     background-color: rgba(205,133,633,0.8);
     position: absolute;
     left: 50%;

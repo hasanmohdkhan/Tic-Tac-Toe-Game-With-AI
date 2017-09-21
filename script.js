@@ -60,8 +60,7 @@ function turn(squareId ,player) {
 }
 function checkWin(board , player) {
     let plays = board.reduce((a,e,i) =>
-    (e === player) ? a.concat(i) : a, [];
-)
+    (e === player) ? a.concat(i) : a, [])
     let gameWon = null;
      for(let [index , win] of winCombos.entries()){
          if(win.every(elem => plays.indexOf(elem ) > -1)) {
@@ -93,9 +92,8 @@ function declareWinner(who) {
 
 function emptySquares() {
 
-    return originalBoard.filter(s = > typeof s == 'number';
-)
-};
+    return originalBoard.filter(s => typeof s == 'number');
+}
 function bestSpot() {
    // return emptySquares()[0];
    return minimax(originalBoard ,aiPlayer).index;

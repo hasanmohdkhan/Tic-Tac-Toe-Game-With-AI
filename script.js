@@ -96,7 +96,6 @@ function emptySquares() {
     return originalBoard.filter(s = > typeof s == 'number';
 )
 };
-
 function bestSpot() {
    // return emptySquares()[0];
    return minimax(originalBoard ,aiPlayer).index;
@@ -115,3 +114,70 @@ function checkTie() {
     }
  return false;
 }
+
+function minimax(newBoard , player)
+{
+    var availSpot = emptySquares(newBoard);
+   // if human player win score: -10
+   // else AI player win score : 10;
+   // else if Tie than score : 0;
+    if(checkWin(newBoard , player))
+    {return {score: -10}; }
+    else if(checkWin(newBoard , aiPlayer)){
+        return{score: 10};
+    }
+    else if (availSpot.length === 0){
+        return {score:0};
+    }
+ var moves = [];
+ for(var i = 0 ; i < availSpot.length ; i++ ){
+     var move = {};
+     move.index = newBoard[availSpot[i]];
+     newBoard[availSpot[i]] = player;
+
+     if(player == aiPlayer){
+         var result = minimax(newBoard ,humanPlayer);
+         move.score = result.score;
+     }
+     else {
+         var result = minimax(newBoard ,aiPlayer);
+         move.score = result.score;
+
+     }
+
+    newBoard[availSpot[i]] = move.index;
+     moves.push(move);
+
+
+ }
+ var bestMove;
+ if (player === aiPlayer) {
+     var bestScore = -10000;
+     for (var i = 0; i < moves.length; i++) {
+         if (moves[i].score > bestScore) {
+             bestScore = moves[i].score;
+             bestMove = i;
+         }
+
+     }
+ }
+
+   else{
+
+         var bestScore = 10000;
+         for(var i =0 ; i < moves.length; i++){
+             if(moves[i].score < bestScore){
+                 bestScore = moves[i].score;
+                 bestMove = i;
+             }
+
+         }
+
+     }
+
+
+     return moves[bestMove];
+
+ }
+
+
